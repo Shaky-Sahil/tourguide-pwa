@@ -1,8 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
+import 'leaflet/dist/leaflet.css'
 import { useEffect, useState } from 'react';
 import { maptiler } from 'pigeon-maps/providers'
 import { Map, Marker, Overlay } from 'pigeon-maps'
+import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import axios from 'axios';
 
 function App() {
@@ -67,19 +68,16 @@ axios.get('')
     <div className="App">
       Mini project
       <div className='map-cont'>
-    <Map  className='map'  defaultCenter={[8.5039,76.9511]} provider={mapTiler} defaultZoom={12}>      
-      {locations.map((l,i)=>(
-      <Marker key={i} width={50} color='orange' anchor={l} onClick={()=>{alert(l)}}/>
-      ))}  
-      <Overlay anchor={coordinates}>
-        <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/home_circle_icon_137496.png" width={50} height={50} alt="home icon" 
-        onClick={()=>{
-          alert('your location')
-          getChurches()
-        }}
-        />
-      </Overlay>
-      </Map>
+      <MapContainer center={coordinates} zoom={12} scrollWheelZoom={false}>
+  <TileLayer
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    //url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    url={`https://api.maptiler.com/maps/${MAP_ID}/256/{z}/{x}/{y}.png?key=${MAPTILER_ACCESS_TOKEN}`}
+
+  />
+  <Marker position={locations[0]}>
+  </Marker>
+</MapContainer>
     </div>
     </div>
   );
