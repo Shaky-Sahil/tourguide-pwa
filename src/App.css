@@ -1,3 +1,9 @@
+.pop{
+  background-color: red;
+}
+.leaflet-popup-content-wrapper {
+  background-color: pink;
+}
 .map-cont{
   height: 100px;
   width: 100vw;
