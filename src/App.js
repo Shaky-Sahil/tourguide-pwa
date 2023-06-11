@@ -34,12 +34,11 @@ useEffect(()=>{
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   axios.get('http://localhost:5000/').then((res)=>{
     res.data.map((r)=>{
-    //setLocations(locations.concat([[r.lat,r.lon]]))
-    //setLocations([...locations,[r.lat,r.lon]])
-    setLocations((prevState) => ([ ...prevState, [r.lat,r.lon] ]));
+    // setLocations((prevState) => ([ ...prevState, [r.lat,r.lon] ]));
 
-    })
-  })    
+    // })
+    setLocations(res.data)})
+  }).catch((err)=>console.log(err))  
 },[])
 
 const geoCode = () => {
@@ -87,10 +86,10 @@ const id = navigator.geolocation.watchPosition(successCallback, errorCallback);
   />
 
        
-   {locations.map((l,i)=>(
-      <Marker key={i} position={l} icon={customIcon}>
+    {locations.map((l,i)=>(
+      <Marker key={i} position={[l.lat,l.lon]} icon={customIcon}>
         <Popup className='pop'>
-        Never gonna give you up. <br /> Never gonna let you down.<br/>
+        {l.placeName}<br/>
          <button>view more</button>
       </Popup>
   </Marker>
