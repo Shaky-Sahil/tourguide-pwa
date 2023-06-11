@@ -1,22 +1,22 @@
+body{
+  margin-left: 0px;
+}
 .pop{
-  background-color: red;
+  background-color: grey;
 }
 .leaflet-popup-content-wrapper {
   background-color: pink;
 }
-.map-cont{
-  height: 100px;
-  width: 100vw;
-}
+
+
 
 .menu-btn{
   margin-left: 2px;
   
 }
 
-.rick{
-  height: 50px;
-  width: 50px;
+.map-cont{
+  width: 100vw;
 }
 
 .leaflet-container{

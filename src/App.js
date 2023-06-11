@@ -1,7 +1,7 @@
 import './App.css';
 import 'leaflet/dist/leaflet.css'
 import { useEffect, useState } from 'react';
-
+import { FaMapMarker } from 'react-icons/fa';
 import { CircleMarker, MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import axios from 'axios';
 import { Icon } from 'leaflet';
@@ -62,12 +62,12 @@ axios.get('')
 }
 
 const customIcon = new Icon({
-  iconUrl : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG0nPxWBZvlHgwMJRpq9cGtjemavxpi3doJ_t53IzWVA&s',
-  iconSize :[38,38]
+  iconUrl : 'https://thenounproject.com/api/private/icons/32369/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0',
+  iconSize :[50,50]
 })
 
 const userCustomIcon = new Icon({
-  iconUrl : 'https://images.gamebanana.com/img/ico/sprays/617466274d5c8.png',
+  iconUrl : 'https://thenounproject.com/api/private/icons/1141824/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0',
   iconSize : [50,50]  
 })
 
@@ -76,28 +76,31 @@ const id = navigator.geolocation.watchPosition(successCallback, errorCallback);
 
   return (
     <div className="App">
-      Mini project
+      Mini project <FaMapMarker/>
       <div className='map-cont'>
-      <MapContainer center={coordinates} zoom={12} zoomControl={false}>
+      <MapContainer center={coordinates} zoom={12} zoomControl={false} minZoom={6} maxZoom={16}>
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     //url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     //url={`https://api.maptiler.com/maps/${MAP_ID}/256/{z}/{x}/{y}.png?key=${MAPTILER_ACCESS_TOKEN}`}
-    url = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    url = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
   />
 
        
-  {/* {locations.map((l,i)=>(
+   {locations.map((l,i)=>(
       <Marker key={i} position={l} icon={customIcon}>
         <Popup className='pop'>
         Never gonna give you up. <br /> Never gonna let you down.<br/>
          <button>view more</button>
       </Popup>
   </Marker>
-      ))}   */}
+      ))}  
 
     <Marker position={coordinates} icon={userCustomIcon}>
-
+    <Popup className='pop'>
+        Your location
+         <button>view more</button>
+      </Popup>
     </Marker>
 </MapContainer>
     </div>
