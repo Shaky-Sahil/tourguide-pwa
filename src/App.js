@@ -17,6 +17,8 @@ function mapTiler (x, y, z, dpr) {
 
 const [coordinates,setCoordinates] = useState([8.5241,76.9366])
 const [locations,setLocations] = useState([])
+const [isActive, setIsActive] = useState(false);
+
 const screenWidth = window.innerWidth
 const successCallback = (position) => {
   console.log(position);
@@ -72,12 +74,17 @@ const userCustomIcon = new Icon({
 
 const id = navigator.geolocation.watchPosition(successCallback, errorCallback);
 
+const handleExpand = event => {
+  // 👇️ toggle isActive state on click
+  setIsActive(current => !current);
+};
+
 
   return (
-    <div className="App">
+    <div  >
       Mini project <FaMapMarker/>
-      <div className='map-cont'>
-      <MapContainer center={coordinates} zoom={12} zoomControl={false} minZoom={6} maxZoom={16}>
+      <div  className={isActive ? 'map-cont' : 'exp-map-cont'}>
+      <MapContainer center={coordinates} zoom={12} zoomControl={true} minZoom={6}>
   <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     //url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -89,10 +96,12 @@ const id = navigator.geolocation.watchPosition(successCallback, errorCallback);
     {locations.map((l,i)=>(
       <Marker key={i} position={[l.lat,l.lon]} icon={customIcon}>
         <Popup className='pop'>
-        {l.placeName}<br/>
-         <button>view more</button>
+         {l.placeName}<br/>
+         <button>view more</button> 
       </Popup>
+    
   </Marker>
+
       ))}  
 
     <Marker position={coordinates} icon={userCustomIcon}>
@@ -102,7 +111,11 @@ const id = navigator.geolocation.watchPosition(successCallback, errorCallback);
       </Popup>
     </Marker>
 </MapContainer>
+<div className='exp' onClick={handleExpand}>
+        Expand
+      </div>
     </div>
+     
     </div>
   );
 }

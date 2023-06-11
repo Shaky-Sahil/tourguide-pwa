@@ -4,21 +4,57 @@ body{
 .pop{
   background-color: grey;
 }
-.leaflet-popup-content-wrapper {
-  background-color: pink;
-}
-
-
-
 .menu-btn{
   margin-left: 2px;
   
 }
 
-.map-cont{
-  width: 100vw;
+ .map-cont{
+  height: 30vh;
+  width: 90vw;
+  margin-left: 5vw;
+}
+
+.exp-map-cont{
+  height: 75vh;
+  width: 90vw;
+  margin-left: 5vw;
 }
 
 .leaflet-container{
-  height: 100vh;
+  height: inherit;
+  width: 90vw;
+ 
+}
+
+.exp{
+  width: inherit;
+  text-align: center;
+  
+  color: white;
+  background-color: rgb(116, 107, 107);
+}
+
+.exp:hover{
+  background-color: grey;
+  color: black;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: pink;
+  height: fit-content;
+  width: fit-content  ;
+}
+
+ .leaflet-popup-content {
+  height: fit-content;
+  width: fit-content;
+} 
+dialog{
+  height: 20px;
+  width: 250px;
+}
+
+.leaflet-popup-tip-container {
+  visibility: hidden;
 }
